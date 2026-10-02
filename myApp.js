@@ -9,11 +9,22 @@ mongoose.connect(process.env.MONGO_URI, {
 
 require('dotenv').config();
 
+mongoose.connection.once('open', () => console.log("MongoDB connected"));
+
+const personSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  age: Number,
+  favoriteFoods: [String]
+});
 
 let Person;
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  const person = new Person({
+    name: "Kirsten",
+    age: 20,
+    favoriteFoods: ["carbonara", "chicken"]
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
